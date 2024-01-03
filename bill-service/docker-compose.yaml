@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  app:
+    image: 'emlakjet-bill-service:latest'
+    platform: linux/amd64
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8090:8090"
+    container_name: bill-service
+    volumes:
+      - ../logs:/logs
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+      - SPRING_DATASOURCE_USERNAME=emlakjet
+      - SPRING_DATASOURCE_PASSWORD=emlakjet123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none  
+  
+  

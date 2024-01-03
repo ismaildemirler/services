@@ -1,0 +1,46 @@
+# Spring Boot configuration
+spring:
+  profiles:
+    active: dev
+    
+  security:
+    jwt:
+      token:
+        secret-key: emlakjetusersecretkeyemlakjetusersecretkeyemlakjetusersecretkeyemlakjetusersecretkey
+        expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+      refresh-token:
+        expire-length: 604800000 
+  
+  # Database configuration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+    username: emlakjet
+    password: emlakjet123
+  
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: none 
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  
+# Logger configuration
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    org.springframework: info
+    org.hibernate: debug
+
+# Server configuration
+server:
+  port: 8090
+
+bill: 
+  amount: 
+    limit: 1000
+    
+endpoint: 
+  basic-url: http://144.126.238.36:8090/

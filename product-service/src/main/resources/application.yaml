@@ -1,0 +1,50 @@
+# Spring Boot configuration
+spring:
+  profiles:
+    active: dev
+  
+  # Database configuration
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+    username: emlakjet
+    password: emlakjet123
+  
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: none 
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    open-in-view: false
+    generate-ddl: true
+  
+  # Redis configuration
+  redis:
+    host: 144.126.238.36
+    port: 6379
+    timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: 8
+        max-wait: -1ms
+        max-idle: 8
+        min-idle: 8
+  cache:
+    type: redis
+    redis:
+      time-to-live: 30
+      cache-null-values: false
+
+# Logger configuration
+logging:
+  pattern:
+    console: "%d %-5level %logger : %msg%n"
+  level:
+    org.springframework: info
+    org.hibernate: debug
+
+# Server configuration
+server:
+  port: 8080

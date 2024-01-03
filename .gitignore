@@ -1,0 +1,19 @@
+HR-E-Ticaret Satın Alma-150623-110813.pdf
+/product-service/target
+/product-service/logs
+/product-service/dump.rdb
+/product-service/mvnw
+/product-service/mvnw.cmd
+/product-service/.classpath
+/product-service/.settings
+/product-service/.mvn
+/product-service/.project
+/bill-service/target
+/bill-service/logs
+/bill-service/dump.rdb
+/bill-service/mvnw
+/bill-service/mvnw.cmd
+/bill-service/.classpath
+/bill-service/.settings
+/bill-service/.mvn
+/bill-service/.project

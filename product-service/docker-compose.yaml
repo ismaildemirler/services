@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  app:
+    image: 'emlakjet-product-service:latest'
+    platform: linux/amd64
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    container_name: product-service
+    volumes:
+      - ../logs:/logs
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+      - SPRING_DATASOURCE_USERNAME=emlakjet
+      - SPRING_DATASOURCE_PASSWORD=emlakjet123
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none  
+      - REDIS_HOST=144.126.238.36
+      - REDIS_PORT=6379
+  
+  
