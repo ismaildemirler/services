@@ -22,47 +22,47 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-@CacheConfig(cacheNames = "productCache")
+//@CacheConfig(cacheNames = "productCache")
 public class ProductServiceImpl implements ProductService {
 
-	private final CacheManagement cacheManagement;
+	//private final CacheManagement cacheManagement;
 	private final ProductMapper productMapper;
 	private final ProductRepository productRepository;
 	
 	@Override
-	@CachePut(cacheNames = RedisConfig.PRODUCTS)
+	//@CachePut(cacheNames = RedisConfig.PRODUCTS)
 	public ProductDto saveProduct(ProductDto productDto) {
 		Product product = productRepository.save(productMapper.toEntity(productDto));
-		cacheManagement.refreshCache(RedisConfig.PRODUCTS);
+		//cacheManagement.refreshCache(RedisConfig.PRODUCTS);
 		return productMapper.toDto(product);
 	}
 	
 	@Override
-	@CachePut(cacheNames = RedisConfig.PRODUCTS)
+	//@CachePut(cacheNames = RedisConfig.PRODUCTS)
 	public ProductDto updateProduct(ProductDto productDto) {
 		Product product = findProduct(productDto.getProductId());
 		product.setName(productDto.getName());
 		product.setPrice(productDto.getPrice());
 		product.setStatus(productDto.isStatus());
 		Product updatedProduct = productRepository.save(product);
-		cacheManagement.refreshCache(RedisConfig.PRODUCTS);
+		//cacheManagement.refreshCache(RedisConfig.PRODUCTS);
 		return productMapper.toDto(updatedProduct);
 	}
 	
 	@Override
-	@Cacheable(cacheNames = RedisConfig.PRODUCTS)
+	//@Cacheable(cacheNames = RedisConfig.PRODUCTS)
 	public ProductDto getProduct(UUID productId) {
 		return productMapper.toDto(findProduct(productId));
 	}
 	
 	@Override
-	@Cacheable(cacheNames = RedisConfig.PRODUCTS, sync = true)
+	//@Cacheable(cacheNames = RedisConfig.PRODUCTS, sync = true)
 	public List<ProductDto> getProducts() {
 		return productMapper.toListDto(productRepository.findAll());
 	}
 	
 	@Override
-	@CacheEvict(value = RedisConfig.PRODUCTS, allEntries=true)
+	//@CacheEvict(value = RedisConfig.PRODUCTS, allEntries=true)
 	public void deleteProduct(UUID productId) {
 		productRepository.delete(findProduct(productId));
 	}

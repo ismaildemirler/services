@@ -193,7 +193,7 @@ public class ProductControllerTest {
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		MockHttpServletResponse response = result.getResponse();
 		assertEquals(HttpStatus.CREATED.value(), response.getStatus());
-		assertEquals(String.format("http://144.126.238.36/api/v1/products/%s", productId),
+		assertEquals(String.format("http://37.148.213.195/api/v1/products/%s", productId),
 				response.getHeader(HttpHeaders.LOCATION));
 		
 		String expected = objectMapper.writeValueAsString(serviceResponse);

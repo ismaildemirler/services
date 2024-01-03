@@ -1,7 +1,10 @@
 package com.emlakjet.ismaildemirler.billservice.core.exception;
 
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -13,6 +16,7 @@ import com.emlakjet.ismaildemirler.billservice.util.exception.DataNotFoundExcept
 import com.emlakjet.ismaildemirler.billservice.util.exception.LimitException;
 
 @ControllerAdvice
+@Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(CustomException.class)
@@ -31,9 +35,15 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 	
 	@ExceptionHandler(UsernameNotFoundException.class)
 	public ResponseEntity<ServiceResponse> exceptionHandler(UsernameNotFoundException e) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
+				ServiceResponse.builder().message(e.getMessage()).error(e.getMessage()).data(null).success(false).build());
+	}
+	
+	@ExceptionHandler(BadCredentialsException.class)
+	public ResponseEntity<ServiceResponse> exceptionHandler(BadCredentialsException e) {
 		return new ResponseEntity<ServiceResponse>(
-				ServiceResponse.builder().message(e.getMessage()).error(e.getMessage()).data(null).success(false).build(),
-				HttpStatus.NOT_FOUND);
+				ServiceResponse.builder().message("Kullanıcı adı veya şifreniz yanlış! Lütfen tekrar deneyiniz.").data(null).success(false).build(),
+				HttpStatus.FORBIDDEN);
 	}
 	
 	@ExceptionHandler(DataNotFoundException.class)

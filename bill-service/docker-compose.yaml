@@ -13,7 +13,7 @@ services:
     volumes:
       - ../logs:/logs
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://37.148.213.195:5432/emlakjet
       - SPRING_DATASOURCE_USERNAME=emlakjet
       - SPRING_DATASOURCE_PASSWORD=emlakjet123
       - SPRING_JPA_HIBERNATE_DDL_AUTO=none  

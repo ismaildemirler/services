@@ -14,7 +14,7 @@ spring:
   # Database configuration
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+    url: jdbc:postgresql://37.148.213.195:5432/emlakjet
     username: emlakjet
     password: emlakjet123
   
@@ -43,4 +43,4 @@ bill:
     limit: 1000
     
 endpoint: 
-  basic-url: http://144.126.238.36:8090/
+  basic-url: http://37.148.213.195:8090/

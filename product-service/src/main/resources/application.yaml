@@ -6,7 +6,7 @@ spring:
   # Database configuration
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://144.126.238.36:5432/emlakjetdb
+    url: jdbc:postgresql://37.148.213.195:5432/emlakjet
     username: emlakjet
     password: emlakjet123
   
@@ -22,8 +22,8 @@ spring:
   
   # Redis configuration
   redis:
-    host: 144.126.238.36
-    port: 6379
+    host: 172.17.0.4
+    port: 6370
     timeout: 10000ms
     lettuce:
       pool:
