@@ -19,3 +19,10 @@
     product-service için "http://37.148.213.195:8080/swagger-ui/index.html" 
     bill-service için "http://37.148.213.195:8090/swagger-ui/index.html"
 ```
+
+# product service curl komutları
+- Servisin çalışır durumda olup olmadığının test edilmesi için `api/v1/auth` endpointi için aşağıdaki 'curl' komutu çalıştırılabilir.
+```
+    curl http://37.148.213.195:8080/api/v1/products/isUp
+```
+Sonuç `true` döndüğü takdirde servisin çalışıyor olduğu anlaşılabilir.
