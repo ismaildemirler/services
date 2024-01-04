@@ -99,3 +99,112 @@ istek başarılı olduğunda aşağıdaki sonuç dönecektir.
         }
     }
 ```
+# bill service curl komutları
+- Servisin çalışır durumda olup olmadığının test edilmesi için `api/v1/auth/isUp` endpointi için aşağıdaki 'curl' komutu çalıştırılabilir. 
+Sonuç `true` döndüğü takdirde servisin çalışıyor olduğu anlaşılabilir.
+```
+    curl http://37.148.213.195:8090/api/v1/auth/isUp
+```
+- Sisteme kullanıcı kaydı için `api/v1/auth/register` endpointine POST isteği gönderen aşağıda örnek verilen 'curl' komutu çalıştırılmalıdır. 
+```
+    curl -i -X POST 37.148.213.195:8090/api/v1/auth/register \
+        -H 'Content-Type: application/json' \
+        -d '{"userId": "f126c53b-1752-4030-9656-77af00373369", "firstName": "John", "lastName":"Doe", "email":"user@domain.com", "password":"123"}'
+```
+istek başarılı olduğu takdirde aşağıdaki sonuç dönecektir.
+```
+    HTTP/1.1 201 
+    Vary: Origin
+    Vary: Access-Control-Request-Method
+    Vary: Access-Control-Request-Headers
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 0
+    Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+    Pragma: no-cache
+    Expires: 0
+    X-Frame-Options: DENY
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Date:
+    {
+        "success": true,
+        "message": "The User Has Been Successfully Registered!",
+        "error": null, 
+        "data": {
+            "fullName": "John Doe", 
+            "email": "user@domain.com"
+        }
+    }
+```
+- Kullanıcı kaydı sonrası sisteme giriş yapabilmek için `api/v1/auth` endpointine POST isteği gönderen 'curl' komutu çalıştırılmalıdır. 
+```
+    curl -i -X POST 37.148.213.195:8090/api/v1/auth \
+        -H 'Content-Type: application/json' \
+        -d '{"email":"user@domain.com", "password":"123"}'
+```
+istek başarılı olduğu takdirde sonuç aşağıdaki gibi olacaktır. Data bölümünde dönen AuthToken secure endpointlere istek yaparken kullanılacaktır. RefreshToken ise AuthToken expire olduğunda kullanıcının yeniden login işlemi yapmasına gerek olmadan yeni bir AuthToken alınmasına olanak sağlayacaktır.
+```
+    HTTP/1.1 200 
+    Vary: Origin
+    Vary: Access-Control-Request-Method
+    Vary: Access-Control-Request-Headers
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 0
+    Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+    Pragma: no-cache
+    Expires: 0
+    X-Frame-Options: DENY
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Date:
+    {
+        "success": true,
+        "message": "Login Succeeded!",
+        "error": null, 
+        "data": {
+            "authToken": "eyJ....", 
+            "refreshToken": "eyJ...."
+        }
+    }
+```
+- Kullanıcı sisteme giriş yaptıktan sonra fatura ekleme işlemi için `api/v1/bills` endpointine POST isteği gönderen 'curl' komutu çalıştırılmalıdır. 
+```
+    curl -i -X POST 37.148.213.195:8090/api/v1/bills \
+        -H 'Content-Type: application/json' \
+        -H 'Authorization: Bearer eyJ...'
+        -d '{"billId":"2b7b59ad-fd07-4cd5-bb2f-d538fbb9fe8e", "firstName": "John", "lastName": "Doe", "email": "user@domain.com", "amount": 500, "productName": "TV"}'
+```
+istek başarılı olduğu takdirde sonuç aşağıdaki gibi olacaktır. Data bölümünde dönen AuthToken secure endpointlere istek yaparken kullanılacaktır. RefreshToken ise AuthToken expire olduğunda kullanıcının yeniden login işlemi yapmasına gerek olmadan yeni bir AuthToken alınmasına olanak sağlayacaktır.
+```
+    HTTP/1.1 200 
+    Vary: Origin
+    Vary: Access-Control-Request-Method
+    Vary: Access-Control-Request-Headers
+    X-Content-Type-Options: nosniff
+    X-XSS-Protection: 0
+    Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+    Pragma: no-cache
+    Expires: 0
+    X-Frame-Options: DENY
+    Content-Type: application/json
+    Transfer-Encoding: chunked
+    Date:
+    {
+        "success": true,
+        "message": "The Bill Has Been Successfully Created!",
+        "error": null, 
+        "data": {
+            "billId": "2b7b59ad-fd07-4cd5-bb2f-d538fbb9fe8e", 
+            "firstName": "John", 
+            "lastName": "Doe", 
+            "email": "user@domain.com", 
+            "amount": 500, 
+            "productName": "TV",
+            "valid": true
+        }
+    }
+```
+- Tüm faturaları görüntüleyebilmek için `api/v1/bills` endpointine istek yapacak olan 'curl' komutu aşağıdaki gibi çalıştırılabilir. 
+```
+    curl -i -H 'Authorization: Bearer eyJ...' 37.148.213.195:8090/api/v1/bills         
+```
