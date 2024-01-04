@@ -4,10 +4,10 @@
 `mvn clean install -Dmaven.test.skip=true` kodu ilgili proje dizininde terminalde çalıştırılmalıdır.
 - product-service servisi Redis bağımlılığına sahip olduğu için Redis bilgisayarda kurulu olmalı ve 
 `redis-server` komutuyla ayağa kaldırılmalıdır.
-- Servisler dokcer kullanılarak ayağa kaldırılmak isteniyorsa `docker-compose up --build` komutu kullanılarak aşağıdaki adreslerde çalışır halde oldukları görülmelidir.
+- Servisler dokcer kullanılarak ayağa kaldırılmak isteniyorsa `docker-compose up --build` komutu kullanılarak aşağıdaki adreslerde çalışır halde oldukları görülebilir.
 ```
-    product-service için "localhost:8080" 
-    bill-service için "localhost:8090"
+    product-service için "localhost:8080/swagger-ui/index.html" 
+    bill-service için "localhost:8090/swagger-ui/index.html"
 ```
 - Docker ortamında çalışılmak istenmiyorsa herhangi bir IDE kullanılarak da servisler ayağa kaldırılıp gerekli testler Postman veya Swagger yapısı kullanılarak gerçekleştirilebilir. Lokalde çalıştırıldığında Swagger adresleri aşağıdaki şekilde olacaktır:
 ```
