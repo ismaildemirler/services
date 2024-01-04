@@ -11,7 +11,7 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.emlakjet.ismaildemirler.billservice.payload.ServiceResponse;
+import com.emlakjet.ismaildemirler.billservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.repository.auth.TokenRepository;
 import com.emlakjet.ismaildemirler.billservice.security.JwtHelper;
 import com.emlakjet.ismaildemirler.billservice.util.Util;

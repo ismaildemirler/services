@@ -1,6 +1,6 @@
 package com.emlakjet.ismaildemirler.productservice.util.exception;
 
-public class DataNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
 
 	/**
@@ -8,7 +8,7 @@ public class DataNotFoundException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = -1025829936688534182L;
 
-	public DataNotFoundException(String message) {
+	public ResourceNotFoundException(String message) {
 		super(message);
 	}
 	

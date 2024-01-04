@@ -8,54 +8,52 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import com.emlakjet.ismaildemirler.billservice.payload.ServiceResponse;
+import com.emlakjet.ismaildemirler.billservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.util.exception.CustomException;
-import com.emlakjet.ismaildemirler.billservice.util.exception.DataNotFoundException;
 import com.emlakjet.ismaildemirler.billservice.util.exception.LimitException;
+import com.emlakjet.ismaildemirler.billservice.util.exception.ResourceNotFoundException;
 
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
 	@ExceptionHandler(CustomException.class)
-	public ResponseEntity<ServiceResponse> exceptionHandler(CustomException e) {
-		return new ResponseEntity<ServiceResponse>(
-				ServiceResponse.builder().message(e.getMessage()).error(e.getMessage()).data(null).success(false).build(),
-				HttpStatus.INTERNAL_SERVER_ERROR);
+	public ResponseEntity<Object> customException(CustomException ex, WebRequest request) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ServiceResponse.builder()
+				.message(ex.getMessage()).error(ex.getMessage()).data(null).success(false).build());
 	}
-	
-	@ExceptionHandler(LimitException.class)
-	public ResponseEntity<ServiceResponse> exceptionHandler(LimitException e) {
-		return new ResponseEntity<ServiceResponse>(
-				ServiceResponse.builder().message(e.getMessage()).error(e.getMessage()).data(null).success(false).build(),
-				HttpStatus.NOT_ACCEPTABLE);
-	}
-	
+
 	@ExceptionHandler(UsernameNotFoundException.class)
-	public ResponseEntity<ServiceResponse> exceptionHandler(UsernameNotFoundException e) {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(
-				ServiceResponse.builder().message(e.getMessage()).error(e.getMessage()).data(null).success(false).build());
+	public ResponseEntity<Object> usernameNotFoundException(UsernameNotFoundException ex, WebRequest request) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ServiceResponse.builder().message(ex.getMessage())
+				.error(ex.getMessage()).data(null).success(false).build());
 	}
-	
+
+	@ExceptionHandler(LimitException.class)
+	public ResponseEntity<Object> limitException(LimitException ex, WebRequest request) {
+		return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(ServiceResponse.builder().message(ex.getMessage())
+				.error(ex.getMessage()).data(null).success(false).build());
+	}
+
 	@ExceptionHandler(BadCredentialsException.class)
-	public ResponseEntity<ServiceResponse> exceptionHandler(BadCredentialsException e) {
-		return new ResponseEntity<ServiceResponse>(
-				ServiceResponse.builder().message("Kullanıcı adı veya şifreniz yanlış! Lütfen tekrar deneyiniz.").data(null).success(false).build(),
-				HttpStatus.FORBIDDEN);
+	public ResponseEntity<Object> badcredentialsException(BadCredentialsException ex, WebRequest request) {
+		return ResponseEntity.status(HttpStatus.FORBIDDEN)
+				.body(ServiceResponse.builder().message("Kullanıcı adı veya şifreniz yanlış! Lütfen tekrar deneyiniz.")
+						.data(null).success(false).build());
 	}
-	
-	@ExceptionHandler(DataNotFoundException.class)
-	public ResponseEntity<ServiceResponse> exceptionHandler(DataNotFoundException e) {
-		return new ResponseEntity<ServiceResponse>(
-				ServiceResponse.builder().message(e.getMessage()).error(e.getMessage()).data(null).success(false).build(),
-				HttpStatus.NO_CONTENT);
+
+	@ExceptionHandler(ResourceNotFoundException.class)
+	public ResponseEntity<Object> resourceNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ServiceResponse.builder().message(ex.getMessage())
+				.error(ex.getMessage()).data(null).success(false).build());
 	}
-	
-	@ExceptionHandler(RuntimeException.class)
-	public ResponseEntity<Object> exceptionHandler(RuntimeException e) {
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
-				ServiceResponse.builder().message("Teknik bir hata ile karşılaşıldı!").error(e.getMessage()).data(null).success(false).build());
+
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<Object> exceptionHandler(Exception ex, WebRequest request) {
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ServiceResponse.builder()
+				.message("Teknik bir hata ile karşılaşıldı!").error(ex.getMessage()).data(null).success(false).build());
 	}
 }

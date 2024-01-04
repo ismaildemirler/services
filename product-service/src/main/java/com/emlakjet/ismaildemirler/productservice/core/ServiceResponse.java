@@ -1,4 +1,4 @@
-package com.emlakjet.ismaildemirler.billservice.payload;
+package com.emlakjet.ismaildemirler.productservice.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,8 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class ServiceResponse implements PayloadModel {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 4170551275019282312L;
+public class ServiceResponse {
+	
 	private boolean success;
 	private String message;
 	private Object error;

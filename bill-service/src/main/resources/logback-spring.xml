@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
 
-    <property name="LOG_PATH" value="./logs" />
-
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+	<property name="DEV_HOME" value="logs" />
+	
+	 <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
                 %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
@@ -12,45 +11,39 @@
         </encoder>
     </appender>
 
-	<appender name="FILEOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${LOG_PATH}/bill-service.log</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-        	<fileNamePattern>${LOG_PATH}/archive/bill-service-logback.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
-            <timeBasedFileNamingAndTriggeringPolicy
-                   class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
-                <maxFileSize>10MB</maxFileSize>
-            </timeBasedFileNamingAndTriggeringPolicy>
-            <maxHistory>30</maxHistory>
-        </rollingPolicy>
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
-            <outputPatternAsHeader>true</outputPatternAsHeader>
-        </encoder>
-    </appender>
+	<appender name="FILE-AUDIT"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${DEV_HOME}/product-service.log</file>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<Pattern>
+				%d{yyyy-MM-dd HH:mm:ss} - %msg%n
+			</Pattern>
+		</encoder>
 
-     <springProfile name="prod">
-    	<root level="error">
-            <appender-ref ref="FILEOUT"/>
-            <appender-ref ref="STDOUT"/>
-        </root>
-        <root level="info">
-            <appender-ref ref="STDOUT"/>
-            <appender-ref ref="FILEOUT"/>
-        </root>
-        <logger name="com.emlakjet.ismaildemirler.billservice" additivity="false" level="debug">
-          	<appender-ref ref="STDOUT"/>
-            <appender-ref ref="FILEOUT"/>
-        </logger>
-    </springProfile> 
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- rollover daily -->
+			<fileNamePattern>${DEV_HOME}/archived/product-service.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>10MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
 
-    <springProfile name="dev">
-        <root level="error">
-        	<appender-ref ref="STDOUT"/>
-            <appender-ref ref="FILEOUT"/>
-        </root>
-        <logger name="com.emlakjet.ismaildemirler.billservice" additivity="false" level="debug">
-            <appender-ref ref="FILEOUT"/>
-            <appender-ref ref="STDOUT"/>
-        </logger>
-    </springProfile>
+	</appender>
+
+	<logger name="com.emlakjet.ismaildemirler.product-service" level="debug"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE-AUDIT" />
+	</logger>
+	
+	<root level="debug">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<root level="error">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="FILE-AUDIT" />
+	</root>
+	
 </configuration>

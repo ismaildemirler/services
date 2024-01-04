@@ -6,7 +6,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Component;
 
-import com.emlakjet.ismaildemirler.productservice.core.exception.CustomError;
+import com.emlakjet.ismaildemirler.productservice.payload.error.CustomError;
 import com.emlakjet.ismaildemirler.productservice.payload.logging.LoggingResponse;
 
 import static com.emlakjet.ismaildemirler.productservice.util.StreamUtils.getStringFromStream;

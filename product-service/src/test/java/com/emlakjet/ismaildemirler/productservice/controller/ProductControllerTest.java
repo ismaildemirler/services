@@ -26,10 +26,10 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.emlakjet.ismaildemirler.productservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.productservice.dto.product.ProductDto;
-import com.emlakjet.ismaildemirler.productservice.payload.ServiceResponse;
 import com.emlakjet.ismaildemirler.productservice.service.product.ProductService;
-import com.emlakjet.ismaildemirler.productservice.util.exception.DataNotFoundException;
+import com.emlakjet.ismaildemirler.productservice.util.exception.ResourceNotFoundException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -56,7 +56,7 @@ public class ProductControllerTest {
 		
 		UUID productId = UUID.randomUUID();		
 		
-		Mockito.when(productService.getProduct(productId)).thenThrow(DataNotFoundException.class);
+		Mockito.when(productService.getProduct(productId)).thenThrow(ResourceNotFoundException.class);
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
 											.get(ENDPOINT_PATH + "/" + productId)
@@ -103,7 +103,7 @@ public class ProductControllerTest {
 	}
 	
 	@Test
-	@DisplayName("Testing If GetProductList Endpoint Returns 204 NO_CONTENT Status")
+	@DisplayName("Testing If GetProductList Endpoint Returns 404 NOT_FOUND Status")
 	public void ProductController_GetProductList_ReturnNoContent() throws Exception {
 		
 		Mockito.when(productService.getProducts()).thenReturn(new ArrayList<>());
@@ -114,7 +114,7 @@ public class ProductControllerTest {
 		
 		MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 		MockHttpServletResponse response = result.getResponse();
-		assertEquals(HttpStatus.NO_CONTENT.value(), response.getStatus());
+		assertEquals(HttpStatus.NOT_FOUND.value(), response.getStatus());
 
 	}	
 	
@@ -246,7 +246,7 @@ public class ProductControllerTest {
 		
 		UUID productId = UUID.randomUUID();	
 		
-		Mockito.doThrow(DataNotFoundException.class).when(productService).deleteProduct(productId);
+		Mockito.doThrow(ResourceNotFoundException.class).when(productService).deleteProduct(productId);
 		
 		RequestBuilder requestBuilder = MockMvcRequestBuilders
 											.delete(ENDPOINT_PATH + "/" + productId)

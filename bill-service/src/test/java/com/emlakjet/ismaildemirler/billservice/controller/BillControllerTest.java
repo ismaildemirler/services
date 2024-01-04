@@ -30,8 +30,8 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.emlakjet.ismaildemirler.billservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.dto.bill.BillDto;
-import com.emlakjet.ismaildemirler.billservice.payload.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.payload.auth.LoginRequest;
 import com.emlakjet.ismaildemirler.billservice.payload.bill.QueryRequest;
 import com.emlakjet.ismaildemirler.billservice.service.bill.BillService;

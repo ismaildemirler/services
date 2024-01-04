@@ -1,6 +1,8 @@
-package com.emlakjet.ismaildemirler.productservice.core.exception;
+package com.emlakjet.ismaildemirler.billservice.payload.error;
 
 import java.util.Date;
+
+import com.emlakjet.ismaildemirler.billservice.payload.PayloadModel;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +15,13 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomError {
+public class CustomError implements PayloadModel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 758550910271424960L;
+	
 	private Date timeStamp;
 	private String message;
 	private String details;

@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emlakjet.ismaildemirler.billservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.dto.user.UserDto;
-import com.emlakjet.ismaildemirler.billservice.payload.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.payload.auth.LoginRequest;
 import com.emlakjet.ismaildemirler.billservice.payload.auth.RefreshRequest;
 import com.emlakjet.ismaildemirler.billservice.service.auth.AuthService;

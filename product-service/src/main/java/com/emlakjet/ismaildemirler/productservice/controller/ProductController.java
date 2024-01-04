@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.emlakjet.ismaildemirler.productservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.productservice.dto.product.ProductDto;
-import com.emlakjet.ismaildemirler.productservice.payload.ServiceResponse;
 import com.emlakjet.ismaildemirler.productservice.service.product.ProductService;
 
 import io.swagger.v3.oas.annotations.Operation;

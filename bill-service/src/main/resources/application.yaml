@@ -7,7 +7,7 @@ spring:
     jwt:
       token:
         secret-key: emlakjetusersecretkeyemlakjetusersecretkeyemlakjetusersecretkeyemlakjetusersecretkey
-        expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
+        expire-length: 300000000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
       refresh-token:
         expire-length: 604800000 
   

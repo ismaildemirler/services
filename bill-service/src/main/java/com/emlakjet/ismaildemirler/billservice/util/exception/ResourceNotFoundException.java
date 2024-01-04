@@ -1,13 +1,13 @@
 package com.emlakjet.ismaildemirler.billservice.util.exception;
 
-public class DataNotFoundException extends RuntimeException {
+public class ResourceNotFoundException extends RuntimeException {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 2683559685498204472L;
 
-	public DataNotFoundException(String message) {
+	public ResourceNotFoundException(String message) {
 		super(message);
 	}
 	

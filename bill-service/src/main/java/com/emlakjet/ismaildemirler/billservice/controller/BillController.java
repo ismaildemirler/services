@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emlakjet.ismaildemirler.billservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.dto.bill.BillDto;
-import com.emlakjet.ismaildemirler.billservice.payload.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.payload.bill.QueryRequest;
 import com.emlakjet.ismaildemirler.billservice.service.bill.BillService;
 

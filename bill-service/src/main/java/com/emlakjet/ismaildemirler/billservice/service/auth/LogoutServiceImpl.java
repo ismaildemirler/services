@@ -7,7 +7,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Service;
 
-import com.emlakjet.ismaildemirler.billservice.payload.ServiceResponse;
+import com.emlakjet.ismaildemirler.billservice.core.ServiceResponse;
 import com.emlakjet.ismaildemirler.billservice.repository.auth.TokenRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

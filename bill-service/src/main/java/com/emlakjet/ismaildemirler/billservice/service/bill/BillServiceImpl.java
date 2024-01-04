@@ -13,7 +13,7 @@ import com.emlakjet.ismaildemirler.billservice.entity.bill.Bill;
 import com.emlakjet.ismaildemirler.billservice.mapper.bill.BillMapper;
 import com.emlakjet.ismaildemirler.billservice.repository.bill.BillRepository;
 import com.emlakjet.ismaildemirler.billservice.repository.user.UserRepository;
-import com.emlakjet.ismaildemirler.billservice.util.exception.DataNotFoundException;
+import com.emlakjet.ismaildemirler.billservice.util.exception.ResourceNotFoundException;
 import com.emlakjet.ismaildemirler.billservice.util.exception.LimitException;
 
 import lombok.RequiredArgsConstructor;
@@ -31,8 +31,11 @@ public class BillServiceImpl implements BillService {
 
 	@Override
 	public BillDto saveBill(BillDto billDto) {
-		var user = userRepository.findByEmail(billDto.getEmail())
-				.orElseThrow(() -> new UsernameNotFoundException("There is no user registered by this email!"));
+		var userOpt = userRepository.findByEmail(billDto.getEmail());
+		if(userOpt.isEmpty()) {
+			throw new UsernameNotFoundException("There is no user registered by this email!");
+		}
+		var user = userOpt.get();
 		Optional<List<Bill>> bills = billRepository.findByEmailAndValid(user.getEmail(), true);
 		Bill bill = Bill.builder()
 				.billId(UUID.randomUUID())
@@ -64,7 +67,7 @@ public class BillServiceImpl implements BillService {
 	public List<BillDto> getBillsByEmail(String email) {
 		List<Bill> bills = billRepository.findByEmail(email).get();
 		if(bills.size() == 0) {
-			throw new DataNotFoundException("There Is No Bills To Display!");
+			throw new ResourceNotFoundException("There Is No Bills To Display!");
 		}
 		return billMapper.toListDto(bills);
 	}
@@ -73,7 +76,7 @@ public class BillServiceImpl implements BillService {
 	public List<BillDto> getBills() {
 		List<Bill> bills = billRepository.findAll();
 		if(bills.size() == 0) {
-			throw new DataNotFoundException("There Is No Bills To Display!");
+			throw new ResourceNotFoundException("There Is No Bills To Display!");
 		}
 		return billMapper.toListDto(bills);
 	}
@@ -82,7 +85,7 @@ public class BillServiceImpl implements BillService {
 	public List<BillDto> getBillsByValid(boolean valid) {
 		List<Bill> bills = billRepository.findByValid(valid).get();
 		if(bills.size() == 0) {
-			throw new DataNotFoundException("There Is No Bills To Display!");
+			throw new ResourceNotFoundException("There Is No Bills To Display!");
 		}
 		return billMapper.toListDto(bills);
 	}
