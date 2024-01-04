@@ -1,0 +1,406 @@
+{
+	"info": {
+		"_postman_id": "60a0a458-da7b-4e6c-abaf-bf744941b596",
+		"name": "Bill Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18550822"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\": \"a94ee877-cd55-48be-bcd6-09f9b67f9c9d\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@domain.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "The User Has Been Successfully Registered!",
+				"error": null,
+				"data": {
+					"fullName": "Jane Doe",
+					"email": "jane@domain.com"
+				}
+			}]
+		},
+		{
+			"name": "User Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"email\": \"jane@domain.com\",\n    \"password\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/auth",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Login Succeeded!",
+				"error": null,
+				"data": {
+					"authToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDExODgsImV4cCI6MTcwNDcwMTE4OH0.npG69R7rEPrPIRXs0TZnyWZKGB9XIHE6eOrt6JrStdI",
+					"refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDExODgsImV4cCI6MTcwNTAwNTk4OH0.H1fk27egcx_Dn9efYV-2KDMsXvlZTCq5AmEot9Vxouw"
+				}
+			}]
+		},
+		{
+			"name": "Refresh Token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n     \"refreshToken\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyMzIsImV4cCI6MTcwNTAwNjAzMn0.EBW7sZTr3jHrkyzCBtP4zsLdoxNzgFYxqPP7cKyD_wM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/auth/refreshToken",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"refreshToken"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Login Succeeded!",
+				"error": null,
+				"data": {
+					"authToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyNzcsImV4cCI6MTcwNDcwMTI3N30.Y_jz1lUwtpW_CYlQENoeqrLYlORAxVtYmJH8pDlTRyc",
+					"refreshToken": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyNzcsImV4cCI6MTcwNTAwNjA3N30.VxR5Snc7b00KzXVEj9qY853Q0C8WEDPyRje-ogM_bi8"
+				}
+			}]
+		},
+		{
+			"name": "Save Bill",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyNzcsImV4cCI6MTcwNDcwMTI3N30.Y_jz1lUwtpW_CYlQENoeqrLYlORAxVtYmJH8pDlTRyc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"billId\": \"946de3a3-9edc-4fdc-9df3-b379a73f2812\",\n    \"firstName\": \"Jane\",\n    \"lastName\": \"Doe\",\n    \"email\": \"jane@domain.com\",\n    \"amount\": 500,\n    \"productName\": \"Monitor\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/bills",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"bills"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "The Bill Has Been Successfully Created!",
+				"error": null,
+				"data": {
+					"billId": "1d3dab6f-7750-40d4-9cfb-966ccf67575d",
+					"firstName": "jane@domain.com",
+					"lastName": "Doe",
+					"email": "jane@domain.com",
+					"amount": 500,
+					"valid": true,
+					"productName": "Monitor",
+					"userId": null
+				}
+			}]
+		},
+		{
+			"name": "Get All Bills",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyNzcsImV4cCI6MTcwNDcwMTI3N30.Y_jz1lUwtpW_CYlQENoeqrLYlORAxVtYmJH8pDlTRyc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/bills",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"bills"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Bill List Has Been Successfully Fetched!",
+				"error": null,
+				"data": [
+					{
+						"billId": "ed2536d9-26f1-4919-8aff-71e3f0f89e17",
+						"firstName": "ismail.demirler@gmail.com",
+						"lastName": "Demirler",
+						"email": "ismail.demirler@gmail.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Keyboard",
+						"userId": null
+					},
+					{
+						"billId": "883eabfd-0545-446b-b83f-68c5d1ff2118",
+						"firstName": "ismail.demirler@gmail.com",
+						"lastName": "Demirler",
+						"email": "ismail.demirler@gmail.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Mouse",
+						"userId": null
+					},
+					{
+						"billId": "6f217f6b-0d47-4686-a594-9690ab61dc40",
+						"firstName": "ismail.demirler@gmail.com",
+						"lastName": "Demirler",
+						"email": "ismail.demirler@gmail.com",
+						"amount": 100,
+						"valid": false,
+						"productName": "Mouse",
+						"userId": null
+					},
+					{
+						"billId": "1d3dab6f-7750-40d4-9cfb-966ccf67575d",
+						"firstName": "jane@domain.com",
+						"lastName": "Doe",
+						"email": "jane@domain.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Monitor",
+						"userId": null
+					}
+				]
+			}]
+		},
+		{
+			"name": "Get Unaccepted / Accepted Bills",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyNzcsImV4cCI6MTcwNDcwMTI3N30.Y_jz1lUwtpW_CYlQENoeqrLYlORAxVtYmJH8pDlTRyc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/bills/true",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"bills",
+						"true"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Accepted Bills Have Been Successfully Fetched!",
+				"error": null,
+				"data": [
+					{
+						"billId": "ed2536d9-26f1-4919-8aff-71e3f0f89e17",
+						"firstName": "ismail.demirler@gmail.com",
+						"lastName": "Demirler",
+						"email": "ismail.demirler@gmail.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Keyboard",
+						"userId": null
+					},
+					{
+						"billId": "883eabfd-0545-446b-b83f-68c5d1ff2118",
+						"firstName": "ismail.demirler@gmail.com",
+						"lastName": "Demirler",
+						"email": "ismail.demirler@gmail.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Mouse",
+						"userId": null
+					},
+					{
+						"billId": "1d3dab6f-7750-40d4-9cfb-966ccf67575d",
+						"firstName": "jane@domain.com",
+						"lastName": "Doe",
+						"email": "jane@domain.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Monitor",
+						"userId": null
+					}
+				]
+			}]
+		},
+		{
+			"name": "Get Bills By Email",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqYW5lQGRvbWFpbi5jb20iLCJpYXQiOjE3MDQ0MDEyNzcsImV4cCI6MTcwNDcwMTI3N30.Y_jz1lUwtpW_CYlQENoeqrLYlORAxVtYmJH8pDlTRyc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"jane@domain.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8090/api/v1/bills/getBillsByEmail",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8090",
+					"path": [
+						"api",
+						"v1",
+						"bills",
+						"getBillsByEmail"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Bill List Has Been Successfully Fetched!",
+				"error": null,
+				"data": [
+					{
+						"billId": "1d3dab6f-7750-40d4-9cfb-966ccf67575d",
+						"firstName": "jane@domain.com",
+						"lastName": "Doe",
+						"email": "jane@domain.com",
+						"amount": 500,
+						"valid": true,
+						"productName": "Monitor",
+						"userId": null
+					}
+				]
+			}]
+		}
+	]
+}

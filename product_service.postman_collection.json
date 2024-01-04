@@ -1,0 +1,220 @@
+{
+	"info": {
+		"_postman_id": "e8cf1478-525b-4aad-bb51-8fb608b0b610",
+		"name": "Product Service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18550822"
+	},
+	"item": [
+		{
+			"name": "Save Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": \"af361811-8010-4956-8790-9ee13c35e555\",\n    \"name\": \"Monitor\",\n    \"price\": 3500,\n    \"status\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8080/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "The Product Has Been Successfully Added!",
+				"error": null,
+				"data": {
+					"productId": "af361811-8010-4956-8790-9ee13c35e555",
+					"name": "Monitor",
+					"price": 3500,
+					"status": true
+				}
+			}]
+		},
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://37.148.213.195:8080/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Product List Has Been Successfully Fetched!",
+				"error": null,
+				"data": [
+					{
+						"productId": "d78fd3c6-430c-4af3-bade-6c16bdaa3b84",
+						"name": "Phone",
+						"price": 1000,
+						"status": true
+					},
+					{
+						"productId": "ddfcedc5-d64e-4676-8c77-43fcd760140d",
+						"name": "Phone",
+						"price": 1000,
+						"status": true
+					},
+					{
+						"productId": "d04fb87f-dbe0-42ac-bf99-613944aae1fc",
+						"name": "Computer",
+						"price": 5000,
+						"status": true
+					},
+					{
+						"productId": "af361811-8010-4956-8790-9ee13c35e555",
+						"name": "Monitor",
+						"price": 3500,
+						"status": true
+					}
+				]
+			}]
+		},
+		{
+			"name": "Update Product",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"productId\": \"af361811-8010-4956-8790-9ee13c35e555\",\n    \"name\": \"Monitor\",\n    \"price\": 4000,\n    \"status\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://37.148.213.195:8080/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "The Product Has Been Successfully Updated!",
+				"error": null,
+				"data": {
+					"productId": "af361811-8010-4956-8790-9ee13c35e555",
+					"name": "Monitor",
+					"price": 4000,
+					"status": true
+				}
+			}]
+		},
+		{
+			"name": "Get Product By Product ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://37.148.213.195:8080/api/v1/products/af361811-8010-4956-8790-9ee13c35e555",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"af361811-8010-4956-8790-9ee13c35e555"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "Product Has Been Successfully Retrieved!",
+				"error": null,
+				"data": {
+					"productId": "af361811-8010-4956-8790-9ee13c35e555",
+					"name": "Monitor",
+					"price": 4000,
+					"status": true
+				}
+			}]
+		},
+		{
+			"name": "Delete Product",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://37.148.213.195:8080/api/v1/products/af361811-8010-4956-8790-9ee13c35e555",
+					"protocol": "http",
+					"host": [
+						"37",
+						"148",
+						"213",
+						"195"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products",
+						"af361811-8010-4956-8790-9ee13c35e555"
+					]
+				}
+			},
+			"response": [{
+				"success": true,
+				"message": "The Product Has Been Deleted Successfully!",
+				"error": null,
+				"data": {
+					"productId": "af361811-8010-4956-8790-9ee13c35e555",
+					"name": null,
+					"price": 0,
+					"status": false
+				}
+			}]
+		}
+	]
+}
